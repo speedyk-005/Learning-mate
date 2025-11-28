@@ -4,15 +4,27 @@
   <img src="https://github.com/speedyk-005/Learning-mate/blob/main/logo.png?raw=true" alt="Learning-mate Logo" width="300"/>
 </p>
 
-“Your smart learning companion, crafting courses and guiding your progress.”
+<p align="center">
+  Your smart learning companion, crafting courses and guiding your progress.
+</p>
+
 
 ---
 
 ## Why I Built It
 
-Learning Mate was created to allow learners to experience a fully automated learning workflow. The way the agent suggests courses, manages them, displays illustrations, guides you through tests, and calculates your overall performance is astonishing. I believe you’ll love it.
+Modern learners jump between tutorials, courses, apps, and random videos, but none of these systems truly adapt to the learner or manage the full learning process. You often end up stitching tools together yourself: one place to study, another to test yourself, another to track progress, and none of them actually understand what you need next.
 
-Currently, Learning Mate uses the Gemini model, but support for other providers may be added in the future.
+Learning Mate was built to solve that problem.
+
+It creates a fully automated, end-to-end learning workflow where the system plans your path, generates courses with a dedicated teaching agent, guides you through lessons and quizzes, illustrates complex concepts, and evaluates your overall performance as you progress. Instead of searching for the right resources, you focus entirely on learning.
+
+The goal is simple: give any learner a structured, personalized, and intelligent learning experience without setup, confusion, or guesswork.
+
+Learning Mate currently runs on the Gemini model, and support for additional AI providers is planned to keep the system flexible and future-proof.
+
+> [!NOTE]
+> Currently, Learning Mate uses the Gemini model, but support for other providers may be added in the future.
 
 ---
 
@@ -31,7 +43,7 @@ cd Learning-mate
 pip install "google-adk>=1.15.0"
 ```
 
-3. Ensure `npx` is installed for MCP tools.
+3. Ensure `npx` is installed for MCP tools. See [How to install node/nodejs & npx](https://gist.github.com/cwsmith-160/e9c8ca80f23027f0495775aed77ec780#file-node_npx_install-md)
 
 4. Make the helper script executable:
 
@@ -47,8 +59,8 @@ chmod +x start_agent.sh
 
 Learning Mate requires the following keys:
 
-* **Google API Key**: Used for accessing Gemini LLM for generating responses.
-* **Tavily API Key (`TAVILY_API_KEY`)**: Required for web search functionality through the MCP tool.
+* **Google API Key**: Used for accessing Gemini LLM for generating responses. [Get yours](https://aistudio.google.com/app/api-keys)
+* **Tavily API Key**: Required for web search functionality through the MCP tool. [Get yours](https://app.tavily.com/home)
 
 Set them in your environment:
 
@@ -117,7 +129,9 @@ adk web "src"
 │       │   ├── plan_course.py
 │       │   └── web_search.py
 │       └── utils.py
+├── .adk/  (Created automatically when running ./start_agent.sh for the first time)
 └── start_agent.sh
+
 ```
 
 ---
