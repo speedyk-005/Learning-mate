@@ -4,7 +4,10 @@
   <img src="https://github.com/speedyk-005/Learning-mate/blob/main/logo.png?raw=true" alt="Learning-mate Logo" width="300"/>
 </p>
 
-“Your smart learning companion, crafting courses and guiding your progress.”
+<p align="center">
+  Your smart learning companion, crafting courses and guiding your progress.
+</p>
+
 
 ---
 
