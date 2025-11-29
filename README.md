@@ -195,7 +195,7 @@ adk web "src"
 │       │   ├── image_generation_agent.py
 │       │   ├── quiz_generation_agent.py
 │       │   └── web_search_agent.py
-│       ├── utils.py
+│       └── utils.py
 └── start_agent.sh
 ```
 
