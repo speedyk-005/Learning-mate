@@ -81,7 +81,7 @@ root_agent = Agent(
         * **Must** always provide helpful, accurate, and user-friendly responses.
         * **Do not** provide answers that require complex reasoning or curriculum planning; delegate those tasks to the `teacher_agent`.
         * **Do not** generate images directly or attempt image creation unless the request is part of or clearly linked to a course creation/lesson context; delegate image-related tasks to the `teacher_agent`.
-        * **Never** stay silent after calling a tool even if it is an agent used as tool.
+        * **Never** stay silent after calling a tool. You must always interpret the result and communicate it to the user.
     """),
     sub_agents=[teacher_agent],
     tools=[
