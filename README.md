@@ -135,6 +135,14 @@ adk web "src"
 
 ---
 
+## Diagram
+
+<p align="left">
+  <img src="https://github.com/speedyk-005/Learning-mate/blob/main/images/diagram.png?raw=true" width="600"/>
+</p>
+
+---
+
 ## Screenshots
 
 ### CLI (Screenshot 0)
@@ -145,8 +153,10 @@ adk web "src"
 
 ---
 
+### Web ui (Screenshot 1-4)
+
 <details>
-  <summary>Web UI Screenshots</summary>
+  <summary>Click to see</summary>
 
   <img src="https://github.com/speedyk-005/Learning-mate/blob/main/images/Screenshot_1.png?raw=true" width="600"/>
 
