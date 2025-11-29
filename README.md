@@ -91,7 +91,7 @@ Learning Mate requires:
 * **Tavily API Key** – for web search via MCP
   **Get yours:** [https://app.tavily.com/home](https://app.tavily.com/home)
 
-Set them in your environment:
+You can set them in your .env file (modify and rename .env.example file to .env) or set them directly in your shell. For example:
 
 ```bash
 export GOOGLE_API_KEY="your_google_key_here"
