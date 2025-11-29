@@ -27,7 +27,7 @@ Learning Mate provides a personalized, organized, and intelligent learning exper
 
 ## Features
 
-* **Automated Course Creation**
+* **Automated & Interactive Course Creation**
   Generates full courses, including structured lessons, quizzes, illustrations, and exercises, through a teaching agent.
 
 * **Personalized Course Suggestions**
