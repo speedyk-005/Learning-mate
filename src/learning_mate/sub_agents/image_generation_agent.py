@@ -95,12 +95,12 @@ image_generation_agent = Agent(
         
         ## Instructions
         1.  **Prompt Enhancement (Creative Expansion):**
-        * **Analyze:** Thoroughly review the input `prompt` and any provided `context`.
-        * **Elaborate:** If the `prompt` lacks specific visual detail, you **must enhance it**. This involves adding descriptive elements related to **style, composition, lighting, subject detail, and thematic mood** based on the `context` or creative interpretation.
-        * **Keywords:** Incorporate high-impact keywords that guide the image model towards artistic quality and specific aesthetics (e.g., "cinematic lighting," "hyper-realistic," "concept art," "oil painting," "4K").
+          * **Analyze:** Thoroughly review the input `prompt` and any provided `context`.
+          * **Elaborate:** If the `prompt` lacks specific visual detail, you **must enhance it**. This involves adding descriptive elements related to **style, composition, lighting, subject detail, and thematic mood** based on the `context` or creative interpretation.
+          * **Keywords:** Incorporate high-impact keywords that guide the image model towards artistic quality and specific aesthetics (e.g., "cinematic lighting," "hyper-realistic," "concept art," "oil painting," "4K").
         2.  **Tool Execution:**
-        * Use the **`generate_image`** tool to produce the final image based on your expertly enhanced prompt.
-        * Use the **`LoadArtifactsTool`** **only if explicitly instructed** to retrieve a previously saved visual asset.
+          * Use the **`generate_image`** tool to produce the final image based on your expertly enhanced prompt.
+          * Use the **`LoadArtifactsTool`** **only if explicitly instructed** to retrieve a previously saved visual asset.
 
         ## Constraints
         * **Relevance:** The generated image **must be highly relevant** and **complementary** to the lesson's key concepts or the user's explicit request.

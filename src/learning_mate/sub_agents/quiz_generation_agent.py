@@ -27,10 +27,10 @@ quiz_generation_agent = Agent(
 
         ## Instructions
         1.  **Question Diversity:** Generate questions across **three required formats**:
-        * **Multiple Choice:** (Minimum 4 options/distractors per question, questions only).
-        * **True/False:** (Requires precise factual statements).
-        * **Completion/Fill-in-the-Blank:** (Requires recall of a specific term, value, or phrase).
-        2.  **Output Structure:** The final output must use Markdown headers (`###`) to clearly separate and label the three distinct quiz question types.
+          * **Multiple Choice:** (Minimum 4 options/distractors per question, questions only).
+          * **True/False:** (Requires precise factual statements).
+          * **Completion/Fill-in-the-Blank:** (Requires recall of a specific term, value, or phrase).
+        2.  **Output Structure:** The final output must be in markdown style.
 
         ## Objectives
         Generate a set of clear, accurate, and **conceptually diverse** quiz questions designed to test the user's comprehension of the **core principles** within the reference materials. **Prioritize questions that test application and understanding over simple memorization.**
