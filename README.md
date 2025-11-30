@@ -82,8 +82,8 @@ cd Learning-mate
 pip install "google-adk>=1.15.0"
 ```
 
-3. Ensure `npx` is installed for MCP tools.
-   Guide: [https://gist.github.com/cwsmith-160/e9c8ca80f23027f0495775aed77ec780#file-node_npx_install-md](https://gist.github.com/cwsmith-160/e9c8ca80f23027f0495775aed77ec780#file-node_npx_install-md)
+3. Ensure npx is installed for MCP tools.
+Guide: https://gist.github.com/cwsmith-160/e9c8ca80f23027f0495775aed77ec780#file-node_npx_install-md
 
 4. Make the helper script executable:
 
