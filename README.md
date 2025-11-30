@@ -59,7 +59,7 @@ The system operates under a clear hierarchical structure anchored by the **`smar
 
 ---
 
-## Diagram
+### Diagram
 
 <p align="left">
   <img src="https://github.com/speedyk-005/Learning-mate/blob/main/images/diagram.png?raw=true" width="600"/>
