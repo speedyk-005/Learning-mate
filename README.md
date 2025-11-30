@@ -55,7 +55,25 @@ Learning Mate provides a personalized, organized, and intelligent learning exper
 
 ## System Architecture Flow
 
-The system operates under a clear hierarchical structure anchored by the **`smart_friend_agent`** (the primary user interface). This root agent delegates complex instructional tasks to the **`teacher_agent`**. The `teacher_agent` serves as the core educational workflow manager, **maintaining direct access to all the same core utilities as the root agent** (including `web_search_agent`, `image_generation_agent`, and `load_memory`). Furthermore, the `teacher_agent` orchestrates the sequential phases of learning by delegating specialized functions to the **`course_planning_agent`**, **`quiz_generation_agent`**, and **`answer_evaluation_agent`**.
+The system is organized hierarchically, with the smart_friend_agent acting as
+the main user interface.
+ * smart_friend_agent
+   * The root agent that interacts directly with users.
+   * Delegates complex instructional tasks to the teacher_agent.
+ * teacher_agent
+   * Core educational workflow manager.
+   * Has access to the same utilities as the root agent, including:
+     * web_search_agent
+     * image_generation_agent
+     * load_memory
+   * Manages the learning process by delegating to specialized agents:
+     * course_planning_agent – Plans and structures lessons.
+     * quiz_generation_agent – Creates quizzes to test learning.
+     * answer_evaluation_agent – Evaluates responses and provides feedback.
+
+This structure ensures that the root agent remains simple for the user, while
+the teacher_agent coordinates all detailed educational workflows in a modular
+and organized way.
 
 ---
 
@@ -219,4 +237,4 @@ adk web "src"
 
 ## License
 
-MIT License — see `LICENSE`.
+MIT License — see [`License`](LICENSE).
