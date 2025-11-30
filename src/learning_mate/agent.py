@@ -47,11 +47,11 @@ teacher_agent = Agent(
     """),
     tools=[
         load_memory,
-        AgentTool(web_search_agent, skip_summarization=True),
-        AgentTool(course_planning_agent, skip_summarization=True),
-        AgentTool(image_generation_agent, skip_summarization=True),
-        AgentTool(quiz_generation_agent, skip_summarization=True),
-        AgentTool(answer_evaluation_agent, skip_summarization=True),
+        AgentTool(web_search_agent),
+        AgentTool(course_planning_agent),
+        AgentTool(image_generation_agent),
+        AgentTool(quiz_generation_agent),
+        AgentTool(answer_evaluation_agent),
     ]
 )
 
@@ -86,6 +86,6 @@ root_agent = Agent(
     sub_agents=[teacher_agent],
     tools=[
         load_memory,
-        AgentTool(web_search_agent, skip_summarization=True),
+        AgentTool(web_search_agent),
     ],
 )
