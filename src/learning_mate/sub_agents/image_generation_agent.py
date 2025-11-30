@@ -53,8 +53,15 @@ async def generate_image(
         image_bytes = BytesIO(response.generated_images[0].image.image_bytes).getvalue()
 
     except Exception as e:
-        message = str(e)
-        similarity = SequenceMatcher(None, message, GOOGLE_FREE_USER_MSG).ratio()
+        # Try to extract the actual error message from the exception
+        try:
+            dict_part = raw_msg.split(". ", 1)[1]  # Remove leading code
+            error_json = ast.literal_eval(dict_part)
+            actual_msg = error_json["error"]["message"]
+        except Exception:
+            actual_msg = raw_msg
+
+        similarity = SequenceMatcher(None, actual_msg, GOOGLE_FREE_USER_MSG).ratio()
 
         if similarity >= 0.8:
             # Pollinations fallback
@@ -63,15 +70,7 @@ async def generate_image(
                 response = requests.get(url)
                 response.raise_for_status()
                 image_bytes = BytesIO(response.content).getvalue()
-
-            except ImportError:
-                return {
-                    "status": "error",
-                    "error_message": (
-                        "Pollinations package is required for fallback image generation. "
-                        "Install it with:\n\npip install pollinations"
-                    )
-                }
+ 
             except Exception as pollination_error:
                 return {
                     "status": "error",
@@ -83,7 +82,7 @@ async def generate_image(
         else:
             return {
                 "status": "error",
-                "error_message": message
+                "error_message": actual_msg
             }
 
     # Create artifact object from generated image data
