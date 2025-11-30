@@ -207,6 +207,16 @@ adk web "src"
 
 ---
 
+## Summary of Speed for the Student
+
+| Feature | Traditional Platforms | AI-Automated Interactive |
+|---------|--------------------|-------------------------|
+| Pacing | Fixed (Often slower for fast learners) | Variable (Moves at your personal speed) |
+| Feedback on Questions | Slow (Hours/Days) | Instant (Seconds) |
+| Content Updates | Slow (Manual revision cycle) | Fast (AI pulls current info dynamically via web search) |
+
+---
+
 ## License
 
 MIT License — see `LICENSE`.

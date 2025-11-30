@@ -4,9 +4,7 @@ The `test.py` script serves as a crucial **integration test** for the **Learning
 
 This test is designed to run from within the project's development environment.
 
-## ⚠️ Prerequisites and Setup
-
-> [!CAUTION]
+> [!IMPORTANT]
 > Before running this test, please ensure you have completed the necessary project setup:
 >
 > * **Installation:** Verify that all Python dependencies are installed. Please check the main project documentation for required packages (e.g., `google-adk`).
