@@ -1,5 +1,4 @@
 from textwrap import dedent
-from collections import deque
 
 from pydantic import BaseModel, Field
 from google.adk.agents import Agent
@@ -16,26 +15,45 @@ class Input(BaseModel):
     reference_data: str | None = Field(None, description="Optional additional reference material to assist evaluation.")
 
 
-def get_student_overall_performance(new_score: int, tool_context: ToolContext) -> dict:
-    """
-    Tracks recent quiz scores and calculates the student's overall performance as a percentage.
-    """
-    # Get existing deque or create one with maxlen 25
-    scores = tool_context.state().get("recent_scores")
-    if scores is None:
-        scores = deque(maxlen=25)
+def get_student_overall_performance(
+    current_quiz_percentage: float,
+    tool_context: ToolContext
+) -> dict:
+    """Tracks recent quiz percentages and calculates the student's overall performance.
 
-    # Append the new score
-    scores.append(new_score)
-    tool_context.state["recent_scores"] = scores
+    The overall performance is calculated as the rolling average of the last 25 quiz percentages.
 
-    # Calculate percentage
-    # Multiply by 5 because each score is based on a 0–5 scale
-    percentage = round((sum(scores) / 100) * len(scores) * 5) if scores else 0
+    Args:
+        current_quiz_percentage: The student's percentage score (0.0 to 100.0) from the
+            most recently completed quiz.
+
+    Returns:
+        A dictionary containing the status and the calculated overall performance percentage.
+        Example: {"status": "success", "overall_percentage": 78}
+    """
+    # Use .get() with a default value for cleaner initialization
+    percentages = tool_context.state.get("recent_percentages", [])
+
+    # Ensure list is manageable (maintains a rolling window of 25 scores)
+    MAX_SCORES = 25
+    if len(percentages) >= MAX_SCORES:
+        percentages.pop(0) # Remove oldest percentage
+
+    # Append the new percentage
+    percentages.append(current_quiz_percentage)
+    tool_context.state["recent_percentages"] = percentages
+
+    # Calculating Percentage (as average of percentages)
+    if percentages:
+        # Overall percentage is the simple average of all stored percentages
+        average_percentage = sum(percentages) / len(percentages)
+        overall_percentage = round(average_percentage)
+    else:
+        overall_percentage = 0
 
     return {
         "status": "success",
-        "percentage": percentage
+        "overall_percentage": overall_percentage
     }
 
 
