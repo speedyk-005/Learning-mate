@@ -1,9 +1,11 @@
 import requests
 from io import BytesIO
 from textwrap import dedent
+from difflib import SequenceMatcher
 
 from pydantic import BaseModel, Field
 
+from google.genai import Client 
 import google.genai.types as types
 from google.adk.agents import Agent
 from google.adk.tools.tool_context import ToolContext
@@ -22,60 +24,88 @@ class Input(BaseModel):
 async def generate_image(
     prompt: str,
     name: str | None = None,
-    tool_context: ToolContext | None = None
+    tool_context: ToolContext
 ) -> dict:
-    """
-    Generate an image using the free Pollinations REST API and save it as an artifact.
+    """Generate an image using Google Imagen API with Pollinations fallback for free users.
 
     Args:
         prompt (str): Description of the desired image.
-        name (str, optional): Optional artifact name.
+        name (str, optional): Optional artifact filename prefix.
 
     Returns:
         dict: {
             "status": "success" or "error",
             "processed_image_artifact": artifact filename,
-            "version_number": saved version,
+            "version": saved version,
             "error_message": optional error message
         }
     """
+    GOOGLE_FREE_USER_MSG = "Imagen API is only accessible to billed users at this time."
+
     try:
-        # REST API URL
-        url = f"https://image.pollinations.ai/prompt/{requests.utils.quote(prompt)}"
-
-        # Download the image
-        response = requests.get(url)
-        response.raise_for_status()
-
-        # Convert to bytes
-        image_bytes = BytesIO(response.content).getvalue()
-
-        # Prepare artifact
-        artifact_name = name or f"{prompt[:30].replace(' ', '_')}_image.png"
-        image_artifact = types.Part(
-            inline_data=types.Blob(
-                mime_type="image/png",
-                data=image_bytes
-            )
+        # Attempt Google Imagen generation first
+        client = genai.Client()
+        response = client.models.generate_images(
+            model="imagen-4.0-generate-001",
+            prompt=prompt,
+            config=types.GenerateImagesConfig(number_of_images=1)
         )
-
-        # Save using tool_context
-        version = await tool_context.save_artifact(
-            filename=artifact_name,
-            artifact=image_artifact,
-        )
-
-        return {
-            "status": "success",
-            "processed_image_artifact": artifact_name,
-            "version_number": version,
-        }
+        image_bytes = BytesIO(response.generated_images[0].image.image_bytes).getvalue()
 
     except Exception as e:
-        return {
-            "status": "error",
-            "error_message": str(e)
-        }
+        message = str(e)
+        similarity = SequenceMatcher(None, message, GOOGLE_FREE_USER_MSG).ratio()
+
+        if similarity >= 0.8:
+            # Pollinations fallback
+            try:
+                url = f"https://image.pollinations.ai/prompt/{requests.utils.quote(prompt)}"
+                response = requests.get(url)
+                response.raise_for_status()
+                image_bytes = BytesIO(response.content).getvalue()
+
+            except ImportError:
+                return {
+                    "status": "error",
+                    "error_message": (
+                        "Pollinations package is required for fallback image generation. "
+                        "Install it with:\n\npip install pollinations"
+                    )
+                }
+            except Exception as pollination_error:
+                return {
+                    "status": "error",
+                    "errr_message": (
+                        f"Google Imagen is not available for free users. "
+                        f"Pollinations attempt encountered an error: {pollination_error}"
+                    )
+                }
+        else:
+            return {
+                "status": "error",
+                "error_message": message
+            }
+
+    # Create artifact object from generated image data
+    artifact_name = name or f"{prompt[:30].replace(' ', '_')}_image.png"
+    image_artifact = types.Part(
+        inline_data=types.Blob(
+            mime_type="image/png",
+            data=image_bytes
+        )
+    )
+
+    # Save artifact using tool context
+    version = await tool_context.save_artifact(
+        filename=artifact_name,
+        artifact=image_artifact,
+    )
+
+    return {
+        "status": "success",
+        "processed_image_artifact": artifact_name,
+        "version": version,
+    }
 
 
 image_generation_agent = Agent(
