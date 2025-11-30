@@ -1,0 +1,98 @@
+{
+  "eval_set_id": "evalsetf13cce",
+  "name": "evalsetf13cce",
+  "eval_cases": [
+    {
+      "eval_id": "casea8687d",
+      "conversation": [
+        {
+          "invocation_id": "e-5c8df6d0-b1ae-428e-95b1-c5df7034418c",
+          "user_content": {
+            "parts": [
+              {
+                "text": "hi"
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "text": "Hey there! How can I help you today? Feeling curious about something, or maybe ready to dive into a new topic? I'm here to help! 😊",
+                "thought_signature": "CtkCAXLI2nx-j9a0SE9ijzmJE9RA1Mg1eFiQrHJ6Gy3PKjZxfY_KOC0LvwwmH9ar-pXaUwi-CxZ6tmFuFRvxZhOkmHYswK4yBD9FDsarkjhPhzJtGMAtCJadrJyu-YBWIuoPb7QMFdNzrInHZAnEve0FJ7xJbpimKM6OyP2bAtJgGiwpjYBHI5nS9_OhTbqgHDz-JEfrkM869FYOXZuTosbVuVg6p37596nb271WRgOa5415hKOvVEoQ18ZX2jJQ4nGrjit-9hCDKl291tX_LLttqf2g2H15AMVUabtXAwKnhMFSm8zUODybGvCK2R5jbUdG_k8oP0f-TRtJANZPVfu683Gz-yr5WtllaLCHcCqYW9nxmsoj-uPGBYQBAM8MBfZG9lvgjctshZG4c0Amk1ddgE9dcQgWKPiPhz7RxKzgtI0DIAjVAwTX5QVin0upXbUedDEoE1WGTxOD"
+              }
+            ],
+            "role": "model"
+          },
+          "intermediate_data": {},
+          "creation_timestamp": 1764552659.121052
+        },
+        {
+          "invocation_id": "e-65394460-980f-4146-9378-973fc51d7814",
+          "user_content": {
+            "parts": [
+              {
+                "text": "create me a lion imsage"
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "text": "Wow, check out this majestic lion! Isn't that a sight?\n\nIs there anything else I can help you with, or perhaps a new topic you'd like to explore? I can even help you create a course on, say, big cats or wildlife photography if you're interested! Let me know! 🦁"
+              }
+            ],
+            "role": "model"
+          },
+          "intermediate_data": {
+            "invocation_events": [
+              {
+                "author": "smart_friend_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-9a4a3794-e7df-460f-b385-2f05de364b74",
+                        "args": {
+                          "prompt": "a lion"
+                        },
+                        "name": "image_generation_agent"
+                      },
+                      "thought_signature": "CqoCAXLI2nyWi2rpNGkG3cfFp7pMfbYVgs1amCkJhCVmr-_v2ufuOSSkHQ135h6oJh37xeg8MUQMZdcGteOYCKbcBCco0RvN8DCi-pEadCbYk7_HG2ZbpQucvUQ6UfYc7yg3iHcSy7GyBmEnfD-6cT9SJd5Vsopq0qeImud5I8PoF2aNs5sN-12inkahvytNqAuu6fQM9L5AgI0k7RgHKjFjcjJoBQ7aYp9gW9-ijBaCp4I-DeM95QOAl5BkfJio1TFNZJpJxibsnqSp-BNHrOPW6pl8xQlcYrbPjgA21T61yUUJQ3rN5pzRamuXNSVF-3suHmGZpgVsH7X_WlBrIgKH9gFy_7pwWCLxTVxD_Xt3nI4gpQNsiuKqAwxaPum3OEBzGDO7_oDKb9tEPQ=="
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "smart_friend_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-9a4a3794-e7df-460f-b385-2f05de364b74",
+                        "name": "image_generation_agent",
+                        "response": {
+                          "result": "A majestic lion standing on a rocky outcrop during sunset, bathed in the golden hour's warm light."
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              }
+            ]
+          },
+          "creation_timestamp": 1764552669.628772
+        }
+      ],
+      "session_input": {
+        "app_name": "learning_mate",
+        "user_id": "user"
+      },
+      "creation_timestamp": 1764553045.8282807
+    }
+  ],
+  "creation_timestamp": 1764553038.833581
+}

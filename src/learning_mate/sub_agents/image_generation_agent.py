@@ -5,14 +5,14 @@ from difflib import SequenceMatcher
 
 from pydantic import BaseModel, Field
 
-from google.genai import Client 
+from google.genai import Client
 import google.genai.types as types
 from google.adk.agents import Agent
 from google.adk.tools.tool_context import ToolContext
 from google.adk.models.google_llm import Gemini
 from google.adk.tools.load_artifacts_tool import LoadArtifactsTool
 
-from ..utils import retry_config, extract_genai_error_message 
+from ..utils import retry_config, extract_genai_error_message
 
 
 class Input(BaseModel):
@@ -24,7 +24,7 @@ class Input(BaseModel):
 async def generate_image(
     prompt: str,
     name: str | None = None,
-    tool_context: ToolContext
+    tool_context: ToolContext = None,
 ) -> dict:
     """Generate an image using Google Imagen API with Pollinations fallback for free users.
 
@@ -44,7 +44,7 @@ async def generate_image(
 
     try:
         # Attempt Google Imagen generation first
-        client = genai.Client()
+        client = Client()
         response = client.models.generate_images(
             model="imagen-4.0-generate-001",
             prompt=prompt,
@@ -63,7 +63,7 @@ async def generate_image(
                 response = requests.get(url)
                 response.raise_for_status()
                 image_bytes = BytesIO(response.content).getvalue()
- 
+
             except Exception as pollination_error:
                 return {
                     "status": "error",
@@ -75,11 +75,11 @@ async def generate_image(
         else:
             return {
                 "status": "error",
-                "error_message": genai_error_msg
+                "error_message": f" error 404 {genai_error_msg}"
             }
 
     # Create artifact object from generated image data
-    artifact_name = name or f"{prompt[:30].replace(' ', '_')}_image.png"
+    artifact_name = name or "_".join(prompt.split()[:7]) + ".png"
     image_artifact = types.Part(
         inline_data=types.Blob(
             mime_type="image/png",
@@ -114,7 +114,7 @@ image_generation_agent = Agent(
 
         ## Objective
         Generate visually rich and contextually precise images that effectively complement and enhance the current lesson overview or user request. This is achieved by expertly refining the input prompt with creative, artistic, and thematic detail.
-        
+
         ## Instructions
         1.  **Prompt Enhancement (Creative Expansion):**
           * **Analyze:** Thoroughly review the input `prompt` and any provided `context`.
