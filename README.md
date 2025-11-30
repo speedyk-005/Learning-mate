@@ -53,6 +53,20 @@ Learning Mate provides a personalized, organized, and intelligent learning exper
 
 ---
 
+## System Architecture Flow
+
+The system operates under a clear hierarchical structure anchored by the **`smart_friend_agent`** (the primary user interface). This root agent delegates complex instructional tasks to the **`teacher_agent`**. The `teacher_agent` serves as the core educational workflow manager, **maintaining direct access to all the same core utilities as the root agent** (including `web_search_agent`, `image_generation_agent`, and `load_memory`). Furthermore, the `teacher_agent` orchestrates the sequential phases of learning by delegating specialized functions to the **`course_planning_agent`**, **`quiz_generation_agent`**, and **`answer_evaluation_agent`**.
+
+---
+
+## Diagram
+
+<p align="left">
+  <img src="https://github.com/speedyk-005/Learning-mate/blob/main/images/diagram.png?raw=true" width="600"/>
+</p>
+
+---
+
 ## Installation
 
 1. Clone the repository:
@@ -132,15 +146,6 @@ Web mode (temporary storage):
 ```bash
 adk web "src"
 ```
-
----
-
-## Diagram
-
-<p align="left">
-  <img src="https://github.com/speedyk-005/Learning-mate/blob/main/images/diagram.png?raw=true" width="600"/>
-</p>
-
 ---
 
 ## Screenshots
@@ -196,6 +201,7 @@ adk web "src"
 │       │   ├── quiz_generation_agent.py
 │       │   └── web_search_agent.py
 │       └── utils.py
+├── .adk/ (Created automatically the first time you run ./start_agent)
 └── start_agent.sh
 ```
 
