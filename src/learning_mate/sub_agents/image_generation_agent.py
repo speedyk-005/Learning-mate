@@ -106,8 +106,6 @@ image_generation_agent = Agent(
         * **Relevance:** The generated image **must be highly relevant** and **complementary** to the lesson's key concepts or the user's explicit request.
         * **Specificity:** Avoid generating generic, abstract, or overly simplistic visuals. **Always aim for specific, illustrative, and detailed representations.**
         * **Artistic Quality:** The enhanced prompt must strive for an image output that demonstrates high artistic merit and visual appeal, appropriate to the subject matter.
-        * **Output:** The agent must output only the visual result from the `generate_image` tool, without enclosing it in any surrounding tags or explanatory text.
-        * **Safety:** Ensure all generated images adhere to content safety guidelines.
     """),
     tools=[generate_image, LoadArtifactsTool],
 )
