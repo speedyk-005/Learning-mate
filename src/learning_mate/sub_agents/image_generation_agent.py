@@ -10,16 +10,32 @@ import google.genai.types as types
 from google.adk.agents import Agent
 from google.adk.tools.tool_context import ToolContext
 from google.adk.models.google_llm import Gemini
-from google.adk.tools.load_artifacts_tool import LoadArtifactsTool
 
 from ..utils import retry_config, extract_genai_error_message
 
 
 class Input(BaseModel):
-    """Model representing the input schema for the agent"""
+    """Model representing the input schema for the image generation agent."""
     prompt: str = Field(..., description="The main description of the image to generate.")
     context: str | None = Field(None, description="Optional additional context to enhance the prompt or add detail.")
 
+class Output(BaseModel):
+    """
+    Model representing the output schema for the image generation agent.
+    This schema returns the information needed for downstream agents.
+    """
+    description: str = Field(
+        ...,
+        description="The final, enhanced prompt that was successfully used to generate the image."
+    )
+    image_artifact_name: str = Field(
+        ...,
+        description="The unique filename or key under which the generated image artifact was saved to the service."
+    )
+    version: int = Field(
+        ...,
+        description="The version number assigned to the saved image artifact by the system."
+    )
 
 async def generate_image(
     prompt: str,
@@ -35,7 +51,7 @@ async def generate_image(
     Returns:
         dict: {
             "status": "success" or "error",
-            "processed_image_artifact": artifact filename,
+            "image_artifact_name": artifact filename,
             "version": saved version,
             "error_message": optional error message
         }
@@ -113,7 +129,7 @@ async def generate_image(
 
     return {
         "status": "success",
-        "processed_image_artifact": artifact_name,
+        "image_artifact_name": artifact_name,
         "version": version,
     }
 
@@ -126,6 +142,7 @@ image_generation_agent = Agent(
     name="image_generation_agent",
     description="An agent that creates and refines visual illustrations to perfectly complement lesson content using contextual cues.",
     input_schema=Input,
+    output_schema=Output,
     instruction=dedent("""
         # Role
         Image Generation Specialist and Visual Concept Artist. Your primary function is to interpret and expand textual requests into detailed, high-quality visual prompts suitable for advanced image generation models, ensuring artistic and contextual alignment.
@@ -138,14 +155,12 @@ image_generation_agent = Agent(
           * **Analyze:** Thoroughly review the input `prompt` and any provided `context`.
           * **Elaborate:** If the `prompt` lacks specific visual detail, you **must enhance it**. This involves adding descriptive elements related to **style, composition, lighting, subject detail, and thematic mood** based on the `context` or creative interpretation.
           * **Keywords:** Incorporate high-impact keywords that guide the image model towards artistic quality and specific aesthetics (e.g., "cinematic lighting," "hyper-realistic," "concept art," "oil painting," "4K").
-        2.  **Tool Execution:**
-          * Use the **`generate_image`** tool to produce the final image based on your expertly enhanced prompt.
-          * Use the **`LoadArtifactsTool`** **only if explicitly instructed** to retrieve a previously saved visual asset.
+        2.  **Tool Execution:** Use the **`generate_image`** tool to produce the final image based on your expertly enhanced prompt.
 
         ## Constraints
         * **Relevance:** The generated image **must be highly relevant** and **complementary** to the lesson's key concepts or the user's explicit request.
         * **Specificity:** Avoid generating generic, abstract, or overly simplistic visuals. **Always aim for specific, illustrative, and detailed representations.**
         * **Artistic Quality:** The enhanced prompt must strive for an image output that demonstrates high artistic merit and visual appeal, appropriate to the subject matter.
     """),
-    tools=[generate_image, LoadArtifactsTool],
+    tools=[generate_image],
 )

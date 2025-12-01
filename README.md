@@ -10,7 +10,7 @@
 
 ---
 
-## Why I Built It
+## 🧑‍💻 Why I Built It
 
 Learners waste an enormous amount of time bouncing between videos, notes, apps, flashcards, and tools that don’t talk to each other. The result is a fragmented workflow where the learner must plan their own curriculum, track progress manually, and guess what to study next. Even highly motivated people lose momentum because the learning process itself is disorganized.
 
@@ -51,44 +51,39 @@ The value is simple: Learning Mate turns scattered effort into steady progress. 
 
 ---
 
-## System Architecture Flow
+## 🤖 System Architecture Flow
 
 The **Learning Mate** system employs a **Multi-Agent System (MAS)** architecture, organized hierarchically to separate user interaction from learning management.
 
 ### 1. Core Orchestration Agents
 
-The system uses two primary orchestration agents:
+The system uses two primary orchestration agents that manage the flow and delegation:
 
-* **`smart_friend_agent`:** The **main user interface** responsible for initial user interaction and delegating complex instructional tasks to the `teacher_agent`.
-* **`teacher_agent`:** The **core learning manager** responsible for structuring the lesson workflow and invoking specialized tools.
+* **`smart_friend_agent` (Sunny):** The **main user interface** responsible for initial user interaction, personalization, and delegating complex instructional tasks to the `teacher_agent`.
+* **`teacher_agent`:** The **core learning manager** responsible for structuring the lesson workflow, enforcing learning progression, and invoking specialized content tools.
 
----
+### 2. Shared Utilities (Foundational Tools)
 
-### 2. Shared Utilities (Agent Tools)
-
-Both core agents have access to these foundational utilities:
+Both the `smart_friend_agent` and the `teacher_agent` have direct access to these foundational, non-pedagogical utilities for context, retrieval, and visuals:
 
 | Agent Utility | Role |
 | :--- | :--- |
-| **`web_search_agent`** | Retrieves information from the web. |
-| **`image_generation_agent`** | Visual Aid Creation |
-| **`load_memory`** | Context Retrieval (Text Memory) |
+| **`web_search_agent`** | Retrieves up-to-date external information. |
+| **`image_generation_agent`** | Visual Aid Creation (Generates images based on prompts). |
+| **`load_memory`** | Context Retrieval (Fetches user preferences and historical state). |
+| **`LoadArtifactsTool`** | Content Retrieval (Loads previously saved images or files for reuse). |
 
----
+### 3. Specialized Delegates (Pedagogical Tools)
 
-### 3. Specialized Delegates (Agent Tools)
-
-The `teacher_agent` specifically delegates the pedagogical steps to these specialized agents:
+The `teacher_agent` specifically delegates the pedagogical steps (planning, content delivery, and evaluation) to these specialized agents:
 
 | Agent Delegate | Role |
 | :--- | :--- |
-| **`course_planning_agent`** | Lesson Structuring |
-| **`quiz_generation_agent`** | Assessment Creation |
-| **`answer_evaluation_agent`** | Response Grading & Feedback |
+| **`course_planning_agent`** | Curriculum Structuring and Lesson Sequencing. |
+| **`quiz_generation_agent`** | Assessment Creation and Question Generation. |
+| **`answer_evaluation_agent`** | Response Grading, Scoring, and Feedback Generation. |
 
-The design ensures **modularity** by treating specialized capabilities as callable **Agent Tools**.
-
----
+The design ensures **modularity** and persistence by treating specialized capabilities as callable **Agent Tools**. See the diagram below.
 
 ### Diagram
 
@@ -98,7 +93,11 @@ The design ensures **modularity** by treating specialized capabilities as callab
 
 ---
 
+<<<<<<< HEAD
 ## Installation
+=======
+## 📦 Installation
+>>>>>>> 0383d68 (refactor(arch): Centralize artifact loading and sync README visuals)
 
 1. Clone the repository:
 
@@ -124,7 +123,7 @@ chmod +x start_agent.sh
 
 ---
 
-## Setup
+## 🪛 Setup
 
 ### API Keys
 
@@ -145,7 +144,7 @@ export TAVILY_API_KEY="your_tavily_key_here"
 
 ---
 
-## Running Learning Mate
+## ▶ Running Learning Mate
 
 Use the helper script:
 
@@ -179,7 +178,7 @@ adk web "src"
 ```
 ---
 
-## Screenshots
+## 📸 Screenshots
 
 ### CLI (Screenshot 0)
 
@@ -206,7 +205,7 @@ adk web "src"
 
 ---
 
-## Directory Structure
+## 🗃 Directory Structure
 
 ```
 .
@@ -248,6 +247,6 @@ adk web "src"
 
 ---
 
-## License
+## 📜 License
 
 MIT License — see [`License`](LICENSE).

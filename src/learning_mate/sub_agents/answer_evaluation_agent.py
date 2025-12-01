@@ -9,7 +9,7 @@ from ..utils import retry_config
 
 
 class Input(BaseModel):
-    """Model representing the input schema for the agent"""
+    """Model representing the input schema for the answer evaluation agent"""
     current_quiz: str = Field(..., description="The full quiz content to be evaluated.")
     answers: str = Field(..., description="The student's submitted answers for the quiz.")
     reference_data: str | None = Field(None, description="Optional additional reference material to assist evaluation.")

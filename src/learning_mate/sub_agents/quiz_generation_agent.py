@@ -9,7 +9,7 @@ from ..utils import retry_config
 
 
 class Input(BaseModel):
-    """Model representing the input schema for the agent"""
+    """Model representing the input schema for the quiz generation agent"""
     reference_data: str = Field(..., description="The reference material or source content from which the quiz should be generated.")
 
 

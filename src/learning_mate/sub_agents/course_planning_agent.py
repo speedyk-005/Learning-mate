@@ -9,7 +9,7 @@ from ..utils import retry_config
 
 
 class Input(BaseModel):
-    """Model representing the input schema for the agent"""
+    """Model representing the input schema for the course planning agent"""
     course_goal: str = Field(
         ...,
         description="Primary learning objective the course must accomplish."
