@@ -5,7 +5,7 @@ from google.adk.agents import Agent
 from google.adk.models.google_llm import Gemini
 from google.adk.tools import AgentTool
 from google.adk.tools import load_memory
-from google.adk.tools.load_artifacts_tool import LoadArtifactsTool
+from google.adk.tools.load_artifacts_tool import load_artifacts_tool
 
 from .sub_agents import *
 from .utils import retry_config
@@ -50,7 +50,7 @@ teacher_agent = Agent(
           * Use the **`image_generation_agent`** strategically to produce illustrations that clarify or conceptually visualize complex topics (e.g., diagrams, metaphors, abstract concepts).
           * Use the **`web_search_agent`** to include up-to-date, highly relevant external information, official documentation, or essential source reference links.
           * Use **`load_memory`** to check historical progress, fetch personalized preferences, or retrieve necessary contextual data.
-          * Use **`LoadArtifactsTool`** to **retrieve any previously saved file or image artifact** that is needed for the current lesson, **especially when reusing content** (like a diagram generated earlier in the course).
+          * Use **`load_artifacts_tool`** to **retrieve any previously saved file or image artifact** that is needed for the current lesson, **especially when reusing content** (like a diagram generated earlier in the course).
         5.  **Evaluation Management:** At points specified by the curriculum plan:
           * Delegate quiz generation to the **`quiz_generation_agent`**.
           * Delegate assessment and scoring to the **`answer_evaluation_agent`**.
@@ -65,7 +65,7 @@ teacher_agent = Agent(
     """),
     tools=[
         load_memory,
-        LoadArtifactsTool,
+        load_artifacts_tool,
         AgentTool(web_search_agent),
         AgentTool(course_planning_agent),
         AgentTool(image_generation_agent),
@@ -95,7 +95,7 @@ root_agent = Agent(
           * Use the **`web_search_agent`** to retrieve up-to-date or external information only when necessary to provide a complete and accurate answer.
           * Use the **`image_generation_agent`** only when a visual aid is crucial for clarifying a concept.
           * Use **`load_memory`** to check user history and preferences (like the user's name or interests) to personalize greetings and responses.
-          * Use **`LoadArtifactsTool`** to **retrieve any previously saved file or image artifact** that the user asks about or is needed for immediate display.
+          * Use **`load_artifacts_tool`** to **retrieve any previously saved file or image artifact** that the user asks about or is needed for immediate display.
         4.  **Proactive Suggestion:** Based on the user's current question, expressed interests, or history, **proactively suggest creating a new personalized course**. Frame the suggestion as an opportunity for in-depth learning.
         5.  **Task Delegation:** Delegate complex tasks that involve **multi-step reasoning, curriculum planning, or guided, sequential instruction** (e.g., "Teach me C# from scratch," or "Design a plan for me to learn game development") to the **`teacher_agent`**.
         6.  **Structural Output:** The final output must be in **Markdown style**.
@@ -108,7 +108,7 @@ root_agent = Agent(
     sub_agents=[teacher_agent],
     tools=[
         load_memory,
-        LoadArtifactsTool,
+        load_artifacts_tool,
         AgentTool(image_generation_agent),
         AgentTool(web_search_agent),
     ],
