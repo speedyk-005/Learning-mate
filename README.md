@@ -12,13 +12,11 @@
 
 ## Why I Built It
 
-Modern learners jump between tutorials, courses, apps, and videos, yet few systems manage the entire learning process in a structured and adaptive way. Learners often assemble their own workflow: one place to learn, another to practice, another to track progress, with none of it adjusting to their goals or performance.
+Learners waste an enormous amount of time bouncing between videos, notes, apps, flashcards, and tools that don’t talk to each other. The result is a fragmented workflow where the learner must plan their own curriculum, track progress manually, and guess what to study next. Even highly motivated people lose momentum because the learning process itself is disorganized.
 
-Learning Mate was created to unify that workflow.
+Learning Mate solves this by unifying the entire learning journey inside one adaptive system. It generates a personalized path from the learner’s goals, provides structured instruction, creates quizzes and visual explanations on demand, adjusts difficulty in real time, and measures understanding with transparent feedback. Instead of juggling disconnected tools, users get a continuous learning flow that feels guided, coherent, and intelligently sequenced.
 
-It automates the full learning pipeline: planning a learning path, generating complete courses through a dedicated teaching agent, guiding the learner through lessons, quizzes, and illustrations, and evaluating performance with structured feedback. The system handles organization and coordination so the learner can focus on understanding the material.
-
-Learning Mate provides a personalized, organized, and intelligent learning experience with zero manual setup.
+The value is simple: Learning Mate turns scattered effort into steady progress. It removes the planning burden, closes the gaps between resources, and gives learners a clear sense of mastery. Users spend less time managing their learning and more time actually learning.
 
 > [!NOTE]
 > Learning Mate currently uses the Gemini model, with planned support for additional AI providers.
@@ -55,25 +53,40 @@ Learning Mate provides a personalized, organized, and intelligent learning exper
 
 ## System Architecture Flow
 
-The system is organized hierarchically, with the smart_friend_agent acting as
-the main user interface.
- * smart_friend_agent
-   * The root agent that interacts directly with users.
-   * Delegates complex instructional tasks to the teacher_agent.
- * teacher_agent
-   * Core educational workflow manager.
-   * Has access to the same utilities as the root agent, including:
-     * web_search_agent
-     * image_generation_agent
-     * load_memory
-   * Manages the learning process by delegating to specialized agents:
-     * course_planning_agent – Plans and structures lessons.
-     * quiz_generation_agent – Creates quizzes to test learning.
-     * answer_evaluation_agent – Evaluates responses and provides feedback.
+The **Learning Mate** system employs a **Multi-Agent System (MAS)** architecture, organized hierarchically to separate user interaction from learning management.
 
-This structure ensures that the root agent remains simple for the user, while
-the teacher_agent coordinates all detailed educational workflows in a modular
-and organized way.
+### 1. Core Orchestration Agents
+
+The system uses two primary orchestration agents:
+
+* **`smart_friend_agent`:** The **main user interface** responsible for initial user interaction and delegating complex instructional tasks to the `teacher_agent`.
+* **`teacher_agent`:** The **core learning manager** responsible for structuring the lesson workflow and invoking specialized tools.
+
+---
+
+### 2. Shared Utilities (Agent Tools)
+
+Both core agents have access to these foundational utilities:
+
+| Agent Utility | Role |
+| :--- | :--- |
+| **`web_search_agent`** | Retrieves information from the web. |
+| **`image_generation_agent`** | Visual Aid Creation |
+| **`load_memory`** | Context Retrieval (Text Memory) |
+
+---
+
+### 3. Specialized Delegates (Agent Tools)
+
+The `teacher_agent` specifically delegates the pedagogical steps to these specialized agents:
+
+| Agent Delegate | Role |
+| :--- | :--- |
+| **`course_planning_agent`** | Lesson Structuring |
+| **`quiz_generation_agent`** | Assessment Creation |
+| **`answer_evaluation_agent`** | Response Grading & Feedback |
+
+The design ensures **modularity** by treating specialized capabilities as callable **Agent Tools**.
 
 ---
 
@@ -212,7 +225,7 @@ adk web "src"
 │       ├── agent.py
 │       ├── __init__.py
 │       ├── __pycache__/
-│       ├── sub_agents
+│       ├── sub_agents (Agents that are used as tools)
 │       │   ├── answer_evaluation_agent.py
 │       │   ├── course_planning_agent.py
 │       │   ├── image_generation_agent.py
