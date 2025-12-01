@@ -75,17 +75,23 @@ async def generate_image(
         else:
             return {
                 "status": "error",
-                "error_message": f" error 404 {genai_error_msg}"
+                "error_message": genai_error_msg
             }
 
     # Create artifact object from generated image data
     artifact_name = name or "_".join(prompt.split()[:7]) + ".png"
-    image_artifact = types.Part(
-        inline_data=types.Blob(
-            mime_type="image/png",
-            data=image_bytes
+    if image_bytes:
+        image_artifact = types.Part(
+            inline_data=types.Blob(
+                mime_type="image/png",
+                data=image_bytes
+            )
         )
-    )
+    else:
+        return {
+            "status": "error",
+            "error_message": f"The image_bytes returned is empty."
+        }
 
     # Save artifact using tool context
     version = await tool_context.save_artifact(
