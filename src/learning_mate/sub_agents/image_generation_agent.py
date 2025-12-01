@@ -59,9 +59,21 @@ async def generate_image(
         if similarity >= 0.8:
             # Pollinations fallback
             try:
-                url = f"https://image.pollinations.ai/prompt/{requests.utils.quote(prompt)}"
-                response = requests.get(url)
-                response.raise_for_status()
+                encoded_prompt = requests.utils.quote(prompt)
+                base_url = f"https://image.pollinations.ai/prompt/{encoded_prompt}"
+
+                # Define parameters to override defaults
+                params = {
+                    "width": 1024,
+                    "height": 1024,
+                    "enhance": "true", # Enables detailed processing
+                    "nologo": "true",  # Removes the watermark
+                    "private": "True", # To prevent it go public
+                    "model": "flux"    # Recommended to specify the model for consistency
+                }
+
+                response = requests.get(base_url, params=params, stream=True)
+                response.raise_for_status() # Check for HTTP errors
                 image_bytes = BytesIO(response.content).getvalue()
 
             except Exception as pollination_error:
