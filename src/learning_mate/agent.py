@@ -103,7 +103,7 @@ root_agent = Agent(
         ## Constraints
         * **Accuracy and Friendliness:** **Must** always provide helpful, accurate, and user-friendly responses.
         * **Delegation Trigger:** **Do not** provide answers that require complex reasoning or multi-unit curriculum planning; **immediately delegate** those tasks to the `teacher_agent`.
-        * **Tool Usage Focus:** The use of **`load_memory`** and **`LoadArtifactsTool`** must be strictly for **context retrieval** and personalization, not for core data processing or course logic.
+        * **Tool Usage Focus:** The use of **`load_memory`** and **`LoadArtifactsTool`** must be strictly for **context retrieval** and personalization, not for core data processing or course logic and they shoul never be called on first run.
         """),
     sub_agents=[teacher_agent],
     tools=[
