@@ -17,21 +17,20 @@ print_separator() {
 # --- 1. ENSURE DIRECTORIES EXIST ---
 # Make sure the artifact and session directories exist and are writable
 PROJECT_ROOT="$PWD"
-mkdir -p "$PROJECT_ROOT/.adk/artifacts"
-mkdir -p "$PROJECT_ROOT/.adk"
-chmod 755 "$PROJECT_ROOT/.adk"
+mkdir -p "$PROJECT_ROOT/.data/artifacts"
+chmod 755 "$PROJECT_ROOT/.data"
 
 # --- 2. CONFIGURATION: CUSTOM URIs ---
 # Session Service URI (Database):
 # Using 'sqlite://<path>' for local, persistent chat session history.
 # This is a robust, local database solution.
 # NOTE: Requires the 'sqlite' dependency to be installed!
-SESSION_URI="sqlite:///$PROJECT_ROOT/.adk/sessions.sqlite"
+SESSION_URI="sqlite:///$PROJECT_ROOT/.data/sessions.sqlite"
 
 # Artifact Service URI (Local File System):
 # Using 'file://<path>' to store all generated non-text data (images, files)
 # in a custom local directory.
-ARTIFACT_URI="file:///$PROJECT_ROOT/.adk/artifacts"
+ARTIFACT_URI="file:///$PROJECT_ROOT/.data/artifacts"
 
 # --- 3. EXECUTION LOGIC ---
 print_separator

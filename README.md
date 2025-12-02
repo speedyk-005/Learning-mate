@@ -157,8 +157,8 @@ This script:
 * Creates directories for sessions and artifacts.
 * Configures storage:
 
-  * `.adk/sessions.sqlite` — session history
-  * `.adk/artifacts/` — generated images and files
+  * `.data/sessions.sqlite` — session history
+  * `.data/artifacts/` — generated images and files
 * Starts the ADK web server.
 * Opens the development UI at:
   `http://127.0.0.1:8000/dev-ui/?app=learning_mate`
@@ -231,7 +231,7 @@ adk web "src"
 │       │   ├── quiz_generation_agent.py
 │       │   └── web_search_agent.py
 │       └── utils.py
-├── .adk/ (Created automatically the first time you run ./start_agent)
+├── .data/ (Created automatically the first time you run ./start_agent)
 └── start_agent.sh
 ```
 
