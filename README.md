@@ -93,11 +93,7 @@ The design ensures **modularity** and persistence by treating specialized capabi
 
 ---
 
-<<<<<<< HEAD
-## Installation
-=======
 ## 📦 Installation
->>>>>>> 0383d68 (refactor(arch): Centralize artifact loading and sync README visuals)
 
 1. Clone the repository:
 
