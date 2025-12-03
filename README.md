@@ -53,7 +53,7 @@ The value is simple: Learning Mate turns scattered effort into steady progress. 
 
 ## 🤖 System Architecture Flow
 
-The **Learning Mate** system employs a **Multi-Agent System (MAS)** architecture, organized hierarchically to separate user interaction from learning management.
+The **Learning Mate** system employs a **Multi-Agent System (MAS)** architecture, organized hierarchically to separate user interaction from learning management. 
 
 ### 1. Core Orchestration Agents
 
@@ -62,28 +62,33 @@ The system uses two primary orchestration agents that manage the flow and delega
 * **`smart_friend_agent` (Sunny):** The **main user interface** responsible for initial user interaction, personalization, and delegating complex instructional tasks to the `teacher_agent`.
 * **`teacher_agent`:** The **core learning manager** responsible for structuring the lesson workflow, enforcing learning progression, and invoking specialized content tools.
 
+
 ### 2. Shared Utilities (Foundational Tools)
 
-Both the `smart_friend_agent` and the `teacher_agent` have direct access to these foundational, non-pedagogical utilities for context, retrieval, and visuals:
+Both the `smart_friend_agent` and the `teacher_agent` have direct access to these foundational, non-pedagogical tools (Agents used as tool, function tool) for context, retrieval, and visuals:
 
-| Agent Utility | Role |
+| Agent (Used as tool) | Role |
 | :--- | :--- |
 | **`web_search_agent`** | Retrieves up-to-date external information. |
 | **`image_generation_agent`** | Visual Aid Creation (Generates images based on prompts). |
+
+| Tool (function as tool) | Role |
+| :--- | :--- |
 | **`load_memory`** | Context Retrieval (Fetches user preferences and historical state). |
 | **`LoadArtifactsTool`** | Content Retrieval (Loads previously saved images or files for reuse). |
 
-### 3. Specialized Delegates (Pedagogical Tools)
+### 3. Exclusive utilities (Pedagogical Tools)
 
-The `teacher_agent` specifically delegates the pedagogical steps (planning, content delivery, and evaluation) to these specialized agents:
+The teacher_agent performs pedagogical steps (planning, content delivery, and evaluation) by calling these specialized agents as tools:
 
-| Agent Delegate | Role |
+| Agent (Used as tool) | Role |
 | :--- | :--- |
 | **`course_planning_agent`** | Curriculum Structuring and Lesson Sequencing. |
 | **`quiz_generation_agent`** | Assessment Creation and Question Generation. |
 | **`answer_evaluation_agent`** | Response Grading, Scoring, and Feedback Generation. |
 
-The design ensures **modularity** and persistence by treating specialized capabilities as callable **Agent Tools**. See the diagram below.
+
+The design ensures **modularity** and persistence by treating specialized capabilities as callable **Agent Tools**. 
 
 ### Diagram
 
