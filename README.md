@@ -142,6 +142,8 @@ You can set them in your .env file (modify and rename .env.example file to .env)
 export GOOGLE_API_KEY="your_google_key_here"
 export TAVILY_API_KEY="your_tavily_key_here"
 ```
+> [!NOTE]
+> Remove the export if you are adding them directly in the .env file.
 
 ---
 
