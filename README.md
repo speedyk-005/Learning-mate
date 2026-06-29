@@ -226,7 +226,6 @@ adk web "src"
 │   └── learning_mate
 │       ├── agent.py
 │       ├── __init__.py
-│       ├── __pycache__/
 │       ├── sub_agents (Agents that are used as tools)
 │       │   ├── answer_evaluation_agent.py
 │       │   ├── course_planning_agent.py
